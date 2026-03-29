@@ -206,7 +206,7 @@ Context usage comparison:
 | Active | ${tools.length * 500} tokens | 5k tokens |
 | Executing | ${tools.length * 500} tokens | 0 tokens |
 
-Savings: ~${Math.round((1 - 5000 / (tools.length * 500)) * 100)}% reduction in typical usage
+Savings: ~${tools.length > 0 ? Math.round((1 - 150 / (tools.length * 500)) * 100) : 0}% reduction in typical usage
 
 ---
 
@@ -339,7 +339,7 @@ export async function convert(options: ConvertOptions): Promise<SkillInfo> {
   const skillName = config.name
 
   // Determine output directory
-  const defaultOutput = path.join(process.env.HOME || '', '.claude', 'skills', skillName)
+  const defaultOutput = path.join(process.cwd(), '.claude', 'skills', skillName)
   const skillDir = outputDir || defaultOutput
 
   console.log(`Generating skill for MCP server: ${skillName}`)
